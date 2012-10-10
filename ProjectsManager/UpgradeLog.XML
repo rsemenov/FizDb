@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="ProjectsManager">
+</Property><Property Name="Solution File" Value="D:\tasks\my\fizdb\FizDb\ProjectsManager\ProjectsManager.sln">
+</Property><Property Name="User Options File" Value="D:\tasks\my\fizdb\FizDb\ProjectsManager\ProjectsManager.suo">
+</Property><Property Name="Date" Value="Wednesday, October 10, 2012">
+</Property><Property Name="Time" Value="16:41 PM">
+</Property></Properties><Event ErrorLevel="0" Project="" Source="ProjectsManager.sln" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager.sln">
+</Event><Event ErrorLevel="0" Project="" Source="ProjectsManager.suo" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager.suo">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\ProjectsManager.csproj" Description="Project file successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\ProjectsManager.csproj">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\DBConfig.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\DBConfig.cs">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\Form1.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\Form1.cs">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\Form1.Designer.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\Form1.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\Program.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\Program.cs">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\Properties\Resources.Designer.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\Properties\Resources.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\Properties\Settings.Designer.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\Properties\Settings.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\ViewForm.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\ViewForm.cs">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\ViewForm.Designer.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\ViewForm.Designer.cs">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\Properties\Settings.settings" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\Properties\Settings.settings">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\DBConfig.xml" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\DBConfig.xml">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\Form1.resx" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\Form1.resx">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\Properties\Resources.resx" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\Properties\Resources.resx">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\ViewForm.resx" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\ProjectsManager\ViewForm.resx">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\ProjectsManager.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="ProjectsManager" Source="ProjectsManager\ProjectsManager.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\Red.csproj" Description="Project file successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\DBA\Red.csproj">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\RedDataSet.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\DBA\RedDataSet.cs">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\IRedComboboxed.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\DBA\IRedComboboxed.cs">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\Properties\AssemblyInfo.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\DBA\Properties\AssemblyInfo.cs">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\RedComboBox.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\DBA\RedComboBox.cs">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\RedDBProvider.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\DBA\RedDBProvider.cs">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\RedTable.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\DBA\RedTable.cs">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\RedView.cs" Description="File successfully backed up as D:\tasks\my\fizdb\FizDb\ProjectsManager\Backup\DBA\RedView.cs">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\Red.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="Red" Source="DBA\Red.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="ProjectsManager.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="ProjectsManager.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="ProjectsManager" Source="ProjectsManager\ProjectsManager.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="Red" Source="DBA\Red.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
