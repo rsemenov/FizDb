@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DBConfig>
+  <Tables>
+    <Table name="Должность" query="Select Код, Название, Описание From Должность" desc="">      
+    </Table>
+    <Table name="Заказ" query="Select * From Заказ" desc="">
+      <ComboBoxes>
+        <ComboBox name="Проэкт" query="Select Название From Проэкты"/>
+        <ComboBox name="Заказчик" query="Select Код, ФИО From Заказчик"/>
+        <ComboBox name="Команда" query="Select Название From Команда"/>
+      </ComboBoxes>
+    </Table>
+    <Table name="Заказчик" query="Select * From Заказчик" desc=""/>
+    <Table name="Команда" query="Select * From Команда" desc=""/>
+    <Table name="Проэкты" query="Select * From Проэкты" desc=""/>
+    <Table name="Технологии" query="Select * From Технологии" desc=""/>
+    <Table name="ТехнологияРаботник" query="Select * From ТехнологияРаботник" desc="">
+      <ComboBoxes>
+        <ComboBox name="Технология" query="Select Название From Технологии"/>
+        <ComboBox name="Работник" query="Select Номер, ФИО From Штат"/>
+      </ComboBoxes>
+    </Table>
+    <Table name="Штат" query="Select * From Штат" desc="">
+      <ComboBoxes>
+        <ComboBox name="Должность" query="Select Код, Название From Должность"/>
+      </ComboBoxes>
+    </Table>
+  </Tables>
+  <Requests>
+    <Request name="Все Заказы" query="SELECT Заказ.Номер, Заказчик.ФИО AS Заказчик, Заказ.Цена, Заказ.Начало AS НачалоПроэкта, Заказ.Конец AS КонецПроэкта, 
+                         Проэкты.Название AS НазваниеПроэкта, Проэкты.Описание AS ОписаниеПроэкта, Заказчик.Организация AS ОрганизацияЗаказчика, 
+                         Заказчик.Телефон AS ТелефонЗаказчика, Команда.Название AS НазваниеКоманды FROM (((Команда INNER JOIN
+                         Заказ ON Команда.Название = Заказ.Команда) INNER JOIN
+                         Заказчик ON Заказ.Заказчик = Заказчик.Код) INNER JOIN
+                         Проэкты ON Заказ.Проэкт = Проэкты.Название)" desc="Отобразить все заказы">
+
+    </Request>
+
+    <Request name="Инфо по заказчику" query="SELECT        Заказчик.Код AS КодЗаказчика, Заказчик.ФИО, Заказчик.Организация, Заказчик.ДатаПоследнегоЗаказа, Заказчик.VIP, Заказчик.Телефон, 
+                         Заказчик.Почта, Заказ.Номер, Заказ.Проэкт, Проэкты.Название AS НазваниеПроэкта, Проэкты.Описание
+FROM            ((Заказчик INNER JOIN
+                         Заказ ON Заказчик.Код = Заказ.Заказчик) INNER JOIN
+                         Проэкты ON Заказ.Проэкт = Проэкты.Название)
+WHERE        (Заказчик.ФИО = '{0}')" desc="Отобразить информацию по заказчику."> 
+      <ComboBoxes>
+        <ComboBox name="ФИО" query="Select ФИО From Заказчик"/>
+      </ComboBoxes>
+    </Request>
+    
+    <Request name="Проэкты команды" query="SELECT        Проэкты.Название AS Проэкт, Заказ.Номер AS [Номер проэкта], Заказ.Цена, Заказ.Начало, Заказ.Конец, Проэкты.Описание AS [Описание проэкта]
+    FROM            ((Заказ INNER JOIN
+    Проэкты ON Заказ.Проэкт = Проэкты.Название) INNER JOIN
+    Команда ON Заказ.Команда = Команда.Название)
+    WHERE        (Команда.Название = '{0}')    " desc="Оторазить все проэкты которыми занимается выбраная команда">
+      <ComboBoxes>
+        <ComboBox name="Команда" query="Select Название FROM Команда"/>
+      </ComboBoxes>
+    </Request>
+    
+    <Request name="Работники Технология Должность" query="SELECT        Штат.ФИО, Штат.ОпытРаботы, Штат.Телефон, Штат.Почта, Штат.Команда, ТехнологияРаботник.Технология, Должность.Название AS Должность
+FROM            ((((Технологии INNER JOIN
+                         ТехнологияРаботник ON Технологии.Название = ТехнологияРаботник.Технология) INNER JOIN
+                         Штат ON ТехнологияРаботник.Работник = Штат.Номер) INNER JOIN
+                         Команда ON Штат.Команда = Команда.Название) INNER JOIN
+                         Должность ON Штат.Должность = Должность.Код)
+WHERE        (ТехнологияРаботник.Технология = '{0}') AND (Должность.Название = '{1}')" desc="Найти работника выбраной должности со знанием выбраной технологии.">
+      <ComboBoxes>
+        <ComboBox name="Технология" query="Select Название FROM Технологии"/>
+        <ComboBox name="Должность" query="Select Название FROM Должность"/>
+      </ComboBoxes>
+    </Request>
+    
+    <Request name="Тим лидеры команд" query="SELECT        Команда.Название AS Команда, Должность.Название AS Должность, Штат.ФИО, Штат.ОпытРаботы, Штат.Телефон, Штат.Почта, Штат.Команда AS Expr1
+FROM            ((Команда INNER JOIN
+                         Штат ON Команда.Название = Штат.Команда) INNER JOIN
+                         Должность ON Штат.Должность = Должность.Код)
+WHERE        (Должность.Название = 'Тим лидер')" desc="Показать всех тим-лидеров">    </Request>
+    
+    <Request name="Команды по кол-ву человек" query="Select Команда.Название,  Команда.Офис, Команда.Телефон, Команда.Почта
+FROM Команда
+Where Команда.Название in
+(
+SELECT       Штат.Команда 
+FROM        Штат
+Group by Штат.Команда having Count(Штат.ФИО)>={0})" desc="Выбрать команды количество человек в которой не меньше указаного числа.">
+      <ComboBoxes>
+        <ComboBox name="Кол-во членов" query="textedit"/>
+      </ComboBoxes>
+    </Request>
+    
+    <Request name="Выбрать все проэкты которыми занимается только выбраная команда." query="Select Проэкт
+From Заказ
+Where Проэкт in 
+(SELECT Проэкты.Название
+FROM Проэкты INNER JOIN Заказ ON Проэкты.Название = Заказ.Проэкт
+WHERE (Заказ.Команда)='{0}')
+Group by Проэкт having Count(Заказ.Команда)=1" desc="Выбрать все проэкты которыми занимается только выбраная команда.">
+      <ComboBoxes>
+        <ComboBox name="Команда" query="Select Название From Команда"/>
+      </ComboBoxes>
+    </Request>
+    
+    <Request name="Команды-партнеры выбраной команды" query="Select Команда
+From Заказ
+Where Not exists
+(SELECT Y.Проэкт
+FROM Заказ as Y
+WHERE Y.Команда='{0}' and Y.Проэкт not in
+(
+Select X.Проэкт
+From Заказ as X
+Where Заказ.Проэкт=X.Проэкт))" desc="Найти названия команд что занимаются по крайне мере теми же проэктами что и выбраная команда.">
+      <ComboBoxes>
+        <ComboBox name="Команда" query="Select Название From Команда"/>
+      </ComboBoxes>
+    </Request>
+    
+    <Request name="Заказчики Сложный" query="Select ФИО
+FROM Заказчик
+WHERE Код in (
+Select Заказчик
+From Заказ
+Where Not exists
+(
+Select X.Команда
+From Заказ as X
+Where Заказ.Команда=X.Команда and X.Команда not in
+(
+SELECT Y.Команда
+FROM Заказ as Y inner join Заказчик as Q on Y.Заказчик = Q.Код
+WHERE Q.ФИО='{0}' ))) " desc="Найти заказчиков которых обслуживают только те команды что и выбраного заказчика.">
+      <ComboBoxes>
+        <ComboBox name="ФИО Заказчика" query="Select ФИО FROM Заказчик"/>
+      </ComboBoxes>
+    </Request>
+
+    <Request name="" query="">
+      <ComboBoxes>
+        <ComboBox name="" query=""/>
+      </ComboBoxes>
+    </Request>
+    
+  </Requests>
+  <ConnectionString>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\TK\БД\Projects.mdb</ConnectionString>
+</DBConfig>

@@ -1,0 +1,59 @@
+using System;
+using System.Data.Common;
+using System.Data.OleDb;
+using System.Data;
+
+namespace Red
+{
+    public class RedDBProvider
+    {
+        public string ConnectionString { get; private set; }
+        public OleDbConnection Connection { get; private set; }
+
+        public RedDBProvider(string conectionString)
+        {
+            ConnectionString = conectionString;
+            Connection = new OleDbConnection(ConnectionString);
+        }
+
+        public void OpenConnection()
+        {
+            if(Connection.State!=ConnectionState.Open)
+                Connection.Open();
+        }
+
+        public void CloseConnection()
+        {
+            if(Connection.State==ConnectionState.Closed)
+                Connection.Close();
+        }
+
+        public DataTable ExecuteSelectCommand(DbCommand command)
+        {
+            DataTable table;
+            try
+            {
+                OpenConnection();
+                DbDataReader reader = command.ExecuteReader();
+                table = new DataTable();
+                table.Load(reader);
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+            return table;
+        }
+
+        public DataTable ExecuteSelectCommand(string query)
+        {
+            DbCommand com = new OleDbCommand(query,Connection);
+            return ExecuteSelectCommand(com);
+        }
+    }
+}
