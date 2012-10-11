@@ -40,6 +40,10 @@ namespace ProjectsManager
         [XmlArray("ComboBoxes")]
         [XmlArrayItem("ComboBox")]
         public ConfigControl[] Comboboxes { get; set; }
+
+        [XmlArray("Columns")]
+        [XmlArrayItem("Column")]
+        public ConfigColumn[] Columns { get; set; }
     }
 
     public class ViewControl:ConfigTable
@@ -47,5 +51,14 @@ namespace ProjectsManager
         /*[XmlArray("Parameters")]
         [XmlArrayItem("Parameter")]
         public string[] parameters { get; set; }*/
+    }
+
+    public class ConfigColumn
+    {
+        [XmlAttribute("name")]
+        public string Name { get; set; }
+
+        [XmlAttribute("alias")]
+        public string Alias { get; set; }
     }
 }

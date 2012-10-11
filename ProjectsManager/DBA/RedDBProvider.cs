@@ -1,6 +1,6 @@
 using System;
 using System.Data.Common;
-using System.Data.OleDb;
+using System.Data.SqlClient;
 using System.Data;
 
 namespace Red
@@ -8,12 +8,12 @@ namespace Red
     public class RedDBProvider
     {
         public string ConnectionString { get; private set; }
-        public OleDbConnection Connection { get; private set; }
+        public SqlConnection Connection { get; private set; }
 
         public RedDBProvider(string conectionString)
         {
             ConnectionString = conectionString;
-            Connection = new OleDbConnection(ConnectionString);
+            Connection = new SqlConnection(ConnectionString);
         }
 
         public void OpenConnection()
@@ -52,7 +52,7 @@ namespace Red
 
         public DataTable ExecuteSelectCommand(string query)
         {
-            DbCommand com = new OleDbCommand(query,Connection);
+            DbCommand com = new SqlCommand(query,Connection);
             return ExecuteSelectCommand(com);
         }
     }

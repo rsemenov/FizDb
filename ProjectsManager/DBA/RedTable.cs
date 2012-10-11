@@ -2,26 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Data;
-using System.Data.OleDb;
+using System.Data.SqlClient;
 
 namespace Red
 {
     public class RedTable:DataTable,IRedComboboxed
     {
-        private OleDbDataAdapter dataAdapter;
+        private SqlDataAdapter dataAdapter;
         public Dictionary<string, RedComboBox> ComboBoxes{get; set;}
+        private Dictionary<string, string> columnHeaders;
         private string query;
 
         public RedTable(string tablename,string query, RedContext context):base(tablename)
         {
             this.query = query;
             context.Provider.OpenConnection();
-            dataAdapter = new OleDbDataAdapter(query, context.Provider.Connection);
-            OleDbCommandBuilder builder = new OleDbCommandBuilder(dataAdapter);
+            dataAdapter = new SqlDataAdapter(query, context.Provider.Connection);
+            var builder = new SqlCommandBuilder(dataAdapter);
             FillAdapter(context);
             dataAdapter.UpdateCommand = builder.GetUpdateCommand();
             context.Provider.CloseConnection();
             ComboBoxes = new Dictionary<string, RedComboBox>();
+            columnHeaders = new Dictionary<string, string>();
         }
 
         public DataTable GetColumnValues(string columnName, RedContext context)
@@ -32,6 +34,23 @@ namespace Red
         public void AddComboBox(string name, RedComboBox checkBox)//addcheckboxhere!
         {
             ComboBoxes.Add(name, checkBox);
+        }
+
+        public string GetColumnAliase(string columnName)
+        {
+            if(columnHeaders.ContainsKey(columnName))
+            {
+                return columnHeaders[columnName];
+            }
+            else
+            {
+                return columnName;
+            }
+        }
+
+        public void AddColumnAliasHere(string name, string alias)
+        {
+            columnHeaders.Add(name, alias);
         }
 
         public int Update(RedContext context)

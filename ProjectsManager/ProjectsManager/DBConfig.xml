@@ -1,31 +1,65 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <DBConfig>
   <Tables>
-    <Table name="Должность" query="Select Код, Название, Описание From Должность" desc="">      
+    <Table name="Секції" query="SELECT TOP 1000 [Id], [Name], [Description]  FROM [Sections]" desc="">
+      <Columns>
+        <Column name="ClassNumber" alias="Номер пари" />
+        <Column name="StartTime" alias="Початок" />
+        <Column name="FinishTime" alias="Кінець" />
+      </Columns>
     </Table>
-    <Table name="Заказ" query="Select * From Заказ" desc="">
-      <ComboBoxes>
-        <ComboBox name="Проэкт" query="Select Название From Проэкты"/>
-        <ComboBox name="Заказчик" query="Select Код, ФИО From Заказчик"/>
-        <ComboBox name="Команда" query="Select Название From Команда"/>
-      </ComboBoxes>
+    <Table name="Розклад дзвінків" query="SELECT  [ClassNumber],[StartTime],[FinishTime]  FROM [ClassNumbers]" desc="Розклад дзвінків">
+      <Columns>
+        <Column name="ClassNumber" alias="Номер пари" />
+        <Column name="StartTime" alias="Початок" />
+        <Column name="FinishTime" alias="Кінець" />
+      </Columns>
+    </Table>    
+    <Table name="Аудиторії" query="SELECT [Id],[Number],[MaxPeople],[BuildingAddress]  FROM [Sportdb].[dbo].[Classrooms]" desc="">
+      <Columns>
+        <Column name="Name" alias="Нaзва" />
+      </Columns>
     </Table>
-    <Table name="Заказчик" query="Select * From Заказчик" desc=""/>
-    <Table name="Команда" query="Select * From Команда" desc=""/>
-    <Table name="Проэкты" query="Select * From Проэкты" desc=""/>
-    <Table name="Технологии" query="Select * From Технологии" desc=""/>
-    <Table name="ТехнологияРаботник" query="Select * From ТехнологияРаботник" desc="">
+	<Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
       <ComboBoxes>
-        <ComboBox name="Технология" query="Select Название From Технологии"/>
-        <ComboBox name="Работник" query="Select Номер, ФИО From Штат"/>
+        <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
       </ComboBoxes>
+      <Columns>
+        <Column name="Name" alias="Нaзва" />
+      </Columns>
     </Table>
-    <Table name="Штат" query="Select * From Штат" desc="">
+    <Table name="Участь у змаганнях" query="SELECT [Id],[CompetitionId],[StudentId],[Result],[Additional]FROM [Sportdb].[dbo].[CompetitionsStudents]" desc="">
       <ComboBoxes>
-        <ComboBox name="Должность" query="Select Код, Название From Должность"/>
+        <ComboBox name="CompetitionId" query="Select [Id], [Name] From Competitions"/>
+		<ComboBox name="StudentId" query="Select [Id], [Name] From Students"/>
       </ComboBoxes>
+      <Columns>
+        <Column name="Name" alias="Нaзва" />
+      </Columns>
+    </Table>
+    <Table name="Курс" query="SELECT [Id], [Title] FROM [Courses]" desc="">
+      <Columns>
+        <Column name="Title" alias="Нaзва курсу" />
+      </Columns>
+    </Table>
+    <Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
+      <ComboBoxes>
+        <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
+      </ComboBoxes>
+      <Columns>
+        <Column name="Name" alias="Нaзва" />
+      </Columns>
+    </Table>
+    <Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
+      <ComboBoxes>
+        <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
+      </ComboBoxes>
+      <Columns>
+        <Column name="Name" alias="Нaзва" />
+      </Columns>
     </Table>
   </Tables>
+  
   <Requests>
     <Request name="Все Заказы" query="SELECT Заказ.Номер, Заказчик.ФИО AS Заказчик, Заказ.Цена, Заказ.Начало AS НачалоПроэкта, Заказ.Конец AS КонецПроэкта, 
                          Проэкты.Название AS НазваниеПроэкта, Проэкты.Описание AS ОписаниеПроэкта, Заказчик.Организация AS ОрганизацияЗаказчика, 
@@ -141,5 +175,6 @@ WHERE Q.ФИО='{0}' ))) " desc="Найти заказчиков которых 
     </Request>
     
   </Requests>
-  <ConnectionString>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\TK\БД\Projects.mdb</ConnectionString>
+  <ConnectionString>Data Source=(local);Initial Catalog=Sportdb;Integrated Security=True</ConnectionString>
+  <ConnectionString2>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\TK\БД\Projects.mdb</ConnectionString2>
 </DBConfig>

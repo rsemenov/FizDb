@@ -41,6 +41,13 @@ namespace ProjectsManager
                         dataSet.tables[t.name].AddComboBox(c.name, new RedComboBox(c.query, c.name));
                     }
                 }
+                if(t.Columns!=null)
+                {
+                    foreach (var c in t.Columns)
+                    {
+                        dataSet.tables[t.name].AddColumnAliasHere(c.Name, c.Alias);
+                    }
+                }
                 lstTables.Items.Add(t.name);
             }
             foreach (var r in config.Requests)
@@ -81,18 +88,18 @@ namespace ProjectsManager
                     dataGridView1.Columns.Add(new DataGridViewComboBoxColumn()
                                                   {
                                                       Name = col.ColumnName,
+                                                      HeaderText = table.GetColumnAliase(col.ColumnName),
                                                       DataSource = comboTable,
                                                       ValueMember = comboTable.Columns[0].ColumnName,
                                                       DisplayMember = (comboTable.Columns.Count > 1)
-                                                                          ?
-                                                                              comboTable.Columns[1].ColumnName
-                                                                          :
-                                                                              comboTable.Columns[0].ColumnName,
+                                                                          ?comboTable.Columns[1].ColumnName
+                                                                          :comboTable.Columns[0].ColumnName,
                                                       DataPropertyName = col.ColumnName
                                                   });
                 }
                 else
-                    dataGridView1.Columns.Add(new DataGridViewTextBoxColumn() { Name = col.ColumnName, DataPropertyName=col.ColumnName});
+                    dataGridView1.Columns.Add(new DataGridViewTextBoxColumn() { Name = col.ColumnName, DataPropertyName=col.ColumnName, 
+                        HeaderText = table.GetColumnAliase(col.ColumnName)});
                 
             }
             dataGridView1.DataSource = table;
