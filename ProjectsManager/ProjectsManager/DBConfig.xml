@@ -42,7 +42,26 @@
         <Column name="Title" alias="Нaзва курсу" />
       </Columns>
     </Table>
-    <Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
+    <Table name="Факультети" query="SELECT [Id],[Name],[DeanName],[Address],[Phone] FROM [Faculties]" desc="">
+      <Columns>
+        <Column name="Name" alias="Нaзва" />
+      </Columns>
+    </Table>
+    <Table name="Розклад пар" query="SELECT [Id], [SectionId],[TeacherId],[ClassroomId],[GroupId],[DayOfWeek],[ClassNumberId] FROM [Scheduler]" desc="">
+      <ComboBoxes>
+        <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
+		<ComboBox name="TeacherId" query="Select [Id], [Name] From Teachers"/>
+		<ComboBox name="ClassroomId" query="Select [Id], [Number] From Classrooms"/>
+		<ComboBox name="GroupId" query="Select [Id], [Name] From Groups"/>
+		<ComboBox name="DayOfWeek" query="Select Day From DaysOfWeek"/>
+		<ComboBox name="ClassNumberId" query="Select ClassNumber From ClassNumbers"/>
+      </ComboBoxes>
+      <Columns>
+        <Column name="Name" alias="Нaзва" />
+      </Columns>
+    </Table>
+  </Tables>
+  <Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
       <ComboBoxes>
         <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
       </ComboBoxes>
@@ -50,7 +69,17 @@
         <Column name="Name" alias="Нaзва" />
       </Columns>
     </Table>
-    <Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
+  </Tables>  
+   <Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
+      <ComboBoxes>
+        <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
+      </ComboBoxes>
+      <Columns>
+        <Column name="Name" alias="Нaзва" />
+      </Columns>
+    </Table>
+  </Tables>  
+  <Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
       <ComboBoxes>
         <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
       </ComboBoxes>
@@ -59,7 +88,6 @@
       </Columns>
     </Table>
   </Tables>
-  
   <Requests>
     <Request name="Все Заказы" query="SELECT Заказ.Номер, Заказчик.ФИО AS Заказчик, Заказ.Цена, Заказ.Начало AS НачалоПроэкта, Заказ.Конец AS КонецПроэкта, 
                          Проэкты.Название AS НазваниеПроэкта, Проэкты.Описание AS ОписаниеПроэкта, Заказчик.Организация AS ОрганизацияЗаказчика, 
