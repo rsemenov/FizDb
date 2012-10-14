@@ -44,6 +44,15 @@ namespace ProjectsManager
         [XmlArray("Columns")]
         [XmlArrayItem("Column")]
         public ConfigColumn[] Columns { get; set; }
+
+        [XmlElement("SearchQuery")]
+        public SearchQuery SearchQuery { get; set; }
+    }
+
+    public class SearchQuery
+    {
+        [XmlAttribute("query")]
+        public string Query { get; set; }
     }
 
     public class ViewControl:ConfigTable

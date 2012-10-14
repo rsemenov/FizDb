@@ -33,7 +33,7 @@ namespace ProjectsManager
             dataSet = new RedDataSet();
             foreach (var t in config.Tables)
             {
-                dataSet.AddTable(t.query, t.name, context);
+                dataSet.AddTable(t.query, t.name, t.SearchQuery==null? null: t.SearchQuery.Query, context);
                 if (t.Comboboxes != null)
                 {
                     foreach (var c in t.Comboboxes)
@@ -108,7 +108,8 @@ namespace ProjectsManager
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            dataSet.tables[curentTableName].Update(context);
+            if(!string.IsNullOrEmpty(curentTableName))
+                dataSet.tables[curentTableName].Update(context);
         }
 
         private void lstReqs_DoubleClick(object sender, EventArgs e)
@@ -181,6 +182,36 @@ namespace ProjectsManager
 Чтобы просмотреть информацую о запросе: правый клик на названии запроса в списке 'Запросы'
 
 Чтобы выполнить запрос: двойной клик на названии запроса в списке 'Запросы'");
+        }
+
+        private void динамікаЗмінToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ChartForm cf = new ChartForm(context);
+            cf.ShowDialog();
+        }
+
+        private void пошукToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SearchForm sf = new SearchForm(dataSet);
+            sf.SearchClicked += new EventHandler<SearchClickedArgs>(sf_SearchClicked);
+            sf.Show();
+        }
+
+        void sf_SearchClicked(object sender, SearchClickedArgs e)
+        {
+            if (dataSet.tables.ContainsKey(e.TableName))
+            {
+                var table = dataSet.tables[e.TableName];
+                var searchquery = string.Format(table.SearchQuery, e.SearchWord);
+                var tbl = context.Provider.ExecuteSelectCommand(searchquery);
+
+                dataGridView1.Columns.Clear();
+                dataGridView1.AutoGenerateColumns = true;
+                dataGridView1.ReadOnly = true;
+                dataGridView1.DataSource = tbl;
+                dataGridView1.Refresh();
+            }
+
         }
 
 

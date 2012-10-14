@@ -10,10 +10,11 @@ namespace Red
     {
         private SqlDataAdapter dataAdapter;
         public Dictionary<string, RedComboBox> ComboBoxes{get; set;}
+        public string SearchQuery { get; set; }
         private Dictionary<string, string> columnHeaders;
         private string query;
 
-        public RedTable(string tablename,string query, RedContext context):base(tablename)
+        public RedTable(string tablename, string query, RedContext context, string searchQuery=null ):base(tablename)
         {
             this.query = query;
             context.Provider.OpenConnection();
@@ -24,6 +25,7 @@ namespace Red
             context.Provider.CloseConnection();
             ComboBoxes = new Dictionary<string, RedComboBox>();
             columnHeaders = new Dictionary<string, string>();
+            SearchQuery = searchQuery;
         }
 
         public DataTable GetColumnValues(string columnName, RedContext context)

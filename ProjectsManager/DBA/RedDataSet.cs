@@ -11,9 +11,9 @@ namespace Red
         public Dictionary<string, RedTable> tables { get; set; }
         public Dictionary<string, RedView> views { get; set; }
         
-        public void AddTable(string query, string name, RedContext context)
+        public void AddTable(string query, string name, string searchQuery, RedContext context)
         {
-            tables.Add(name, new RedTable(name, query, context));
+            tables.Add(name, new RedTable(name, query, context, searchQuery));
         }
 
         public void AddView(string query, string name, string description, RedContext context)
