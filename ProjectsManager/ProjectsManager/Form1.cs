@@ -16,6 +16,8 @@ namespace ProjectsManager
         private RedDataSet dataSet;
         private DBConfig config;
 
+        private User currentUser;
+
         private string curentTableName;
         private string curentViewName;
 
@@ -24,8 +26,15 @@ namespace ProjectsManager
             this.config = config;
             InitializeComponent();
             context = new RedContext() {Provider = new RedDBProvider(config.ConnectionString)};
+            
+            LoginForm lf = new LoginForm(context);
+            while(lf.CurrentUser==null)
+                lf.ShowDialog();
+
+            currentUser = lf.CurrentUser;
             InitForm();
             dataGridView1.AutoGenerateColumns = false;
+
         }
 
         private void InitForm()
@@ -61,6 +70,11 @@ namespace ProjectsManager
                    }
                }
                lstReqs.Items.Add(r.name);
+            }
+            if(currentUser.UserType == UserType.Admin)
+            {
+                dataSet.AddTable("Select Login as Логин, Password as Пароль, UserType as ТипКорисувача From Users", "Users", null, context);
+                dataSet.tables["Users"].AddComboBox("ТипКорисувача", new RedComboBox("Select Id, TypeName", "ТипКорисувача"));
             }
         }
 
