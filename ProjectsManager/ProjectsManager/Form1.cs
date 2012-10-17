@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using Red;
+using System.IO;
+using log4net;
 
 namespace ProjectsManager
 {
@@ -15,6 +17,7 @@ namespace ProjectsManager
         private RedContext context;
         private RedDataSet dataSet;
         private DBConfig config;
+        public static readonly ILog log = LogManager.GetLogger(typeof(Form1));
 
         private User currentUser;
 
@@ -23,6 +26,7 @@ namespace ProjectsManager
 
         public Form1(DBConfig config)
         {
+            log.Debug("Application started...");
             this.config = config;
             InitializeComponent();
             context = new RedContext() {Provider = new RedDBProvider(config.ConnectionString)};
@@ -32,6 +36,8 @@ namespace ProjectsManager
                 lf.ShowDialog();
 
             currentUser = lf.CurrentUser;
+            log.DebugFormat("User {0} loged in.", currentUser.Login);
+
             InitForm();
             dataGridView1.AutoGenerateColumns = false;
 
@@ -73,6 +79,7 @@ namespace ProjectsManager
             }
             if(currentUser.UserType == UserType.Admin)
             {
+                адмініструванняToolStripMenuItem.Visible = true;
                 dataSet.AddTable("Select Login as Логин, Password as Пароль, UserType as ТипКорисувача From Users", "Users", null, context);
                 dataSet.tables["Users"].AddComboBox("ТипКорисувача", new RedComboBox("Select Id, TypeName", "ТипКорисувача"));
             }
@@ -122,8 +129,11 @@ namespace ProjectsManager
 
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(!string.IsNullOrEmpty(curentTableName))
+            if (!string.IsNullOrEmpty(curentTableName))
+            {
+                log.DebugFormat("Data saved in database. User {0}", currentUser.Login);
                 dataSet.tables[curentTableName].Update(context);
+            }
         }
 
         private void lstReqs_DoubleClick(object sender, EventArgs e)
@@ -156,6 +166,7 @@ namespace ProjectsManager
                     }
                 }catch(Exception ex)
                 {
+                    log.DebugFormat("Error occured. User {0}\r\n {1}", currentUser.Login, ex);
                     Message("Ошибка выполнения запроса. Проверте правильность параметров.");
                 }
             }
@@ -168,6 +179,7 @@ namespace ProjectsManager
 
         private void dataGridView1_DataError(object sender, DataGridViewDataErrorEventArgs e)
         {
+            log.DebugFormat("Error occured. User {0}\r\n {1}", currentUser.Login, "Несовпадение типов данных. Проверте правильность ввода данных.");
             Message("Несовпадение типов данных. Проверте правильность ввода данных.");
         }
 
@@ -200,6 +212,7 @@ namespace ProjectsManager
 
         private void динамікаЗмінToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            log.DebugFormat("User {0} opened dynamics changes form.", currentUser.Login);
             ChartForm cf = new ChartForm(context);
             cf.ShowDialog();
         }
@@ -208,15 +221,19 @@ namespace ProjectsManager
         {
             SearchForm sf = new SearchForm(dataSet);
             sf.SearchClicked += new EventHandler<SearchClickedArgs>(sf_SearchClicked);
+            log.DebugFormat("User {0} opened search form.", currentUser.Login);
             sf.Show();
         }
 
         void sf_SearchClicked(object sender, SearchClickedArgs e)
         {
+            log.DebugFormat("User {0} opened search form.", currentUser.Login);
             if (dataSet.tables.ContainsKey(e.TableName))
             {
                 var table = dataSet.tables[e.TableName];
                 var searchquery = string.Format(table.SearchQuery, e.SearchWord);
+                log.DebugFormat("User {0} SearchWord={1}.", currentUser.Login, e.SearchWord);
+                log.DebugFormat("User {0} SearchQuery={1}.", currentUser.Login, searchquery);
                 var tbl = context.Provider.ExecuteSelectCommand(searchquery);
 
                 dataGridView1.Columns.Clear();
@@ -226,6 +243,38 @@ namespace ProjectsManager
                 dataGridView1.Refresh();
             }
 
+        }
+
+        private void зробитиАрхівБазиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dbpath = ".\\sportdb.mdf";
+            var dblogpath = ".\\sportdb_log.ldf";
+            var archivedbpath = ".\\archive\\sportdb{0}{1}{2}.mdf";
+            var archivedbpathlog = ".\\archive\\sportdb{0}{1}{2}_log.ldf";
+            File.Copy(dbpath, string.Format(archivedbpath, DateTime.Now.Year,DateTime.Now.Month, DateTime.Now.Day));
+            File.Copy(dblogpath, string.Format(archivedbpathlog, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
+            log.DebugFormat("User {0}. Archive created for date {1}", currentUser.Login, DateTime.Now.ToString("yyyy/MM/dd"));
+        }
+
+        private void відкритиАрхівToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            if(ofd.ShowDialog() == DialogResult.OK)
+            {
+                if (Path.GetExtension(ofd.FileName) == ".mdf")
+                {
+                    context = new RedContext()
+                                  {
+                                      Provider = new RedDBProvider(string.Format(config.ArchiveConnectionStringPattern, Path.GetFileName(ofd.FileName)))
+                                  };
+                    log.DebugFormat("User {0} opened archive file {1}", currentUser.Login, Path.GetFileName(ofd.FileName));
+                }
+            }
+        }
+
+        private void відкритиПоточнийСтанToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            context = new RedContext() { Provider = new RedDBProvider(config.ConnectionString) };
         }
 
 

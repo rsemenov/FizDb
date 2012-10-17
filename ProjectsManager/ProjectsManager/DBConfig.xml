@@ -197,5 +197,6 @@ Having Count(Id)&lt;{0})" desc="Відобразити всі групи де к
     
   </Requests>
   <ConnectionString>Data Source=.\SQLEXPRESS2008;Initial Catalog=Sportdb;Integrated Security=True</ConnectionString>
+  <ArchiveConnectionStringPattern>Data Source=.\SQLEXPRESS2008;Initial Catalog=Sportdb;Integrated Security=True</ArchiveConnectionStringPattern>
   <ConnectionString2>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\TK\БД\Projects.mdb</ConnectionString2>
 </DBConfig>

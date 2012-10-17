@@ -32,6 +32,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.действиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.динамікаЗмінToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.пошукToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -44,8 +46,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.динамікаЗмінToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.пошукToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.адмініструванняToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.зробитиАрхівБазиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.відкритиАрхівToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.відкритиПоточнийСтанToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel4.SuspendLayout();
@@ -59,7 +63,8 @@
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.действиеToolStripMenuItem,
-            this.помощьToolStripMenuItem});
+            this.помощьToolStripMenuItem,
+            this.адмініструванняToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(779, 24);
@@ -73,20 +78,34 @@
             this.динамікаЗмінToolStripMenuItem,
             this.пошукToolStripMenuItem});
             this.действиеToolStripMenuItem.Name = "действиеToolStripMenuItem";
-            this.действиеToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.действиеToolStripMenuItem.Size = new System.Drawing.Size(70, 20);
             this.действиеToolStripMenuItem.Text = "Действие";
             // 
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
-            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
             this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
+            // 
+            // динамікаЗмінToolStripMenuItem
+            // 
+            this.динамікаЗмінToolStripMenuItem.Name = "динамікаЗмінToolStripMenuItem";
+            this.динамікаЗмінToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.динамікаЗмінToolStripMenuItem.Text = "Динаміка змін";
+            this.динамікаЗмінToolStripMenuItem.Click += new System.EventHandler(this.динамікаЗмінToolStripMenuItem_Click);
+            // 
+            // пошукToolStripMenuItem
+            // 
+            this.пошукToolStripMenuItem.Name = "пошукToolStripMenuItem";
+            this.пошукToolStripMenuItem.Size = new System.Drawing.Size(153, 22);
+            this.пошукToolStripMenuItem.Text = "Пошук";
+            this.пошукToolStripMenuItem.Click += new System.EventHandler(this.пошукToolStripMenuItem_Click);
             // 
             // помощьToolStripMenuItem
             // 
             this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.помощьToolStripMenuItem.Text = "Помощь";
             this.помощьToolStripMenuItem.Click += new System.EventHandler(this.помощьToolStripMenuItem_Click);
             // 
@@ -128,12 +147,12 @@
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.описаниеЗапорсаToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(167, 26);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(177, 26);
             // 
             // описаниеЗапорсаToolStripMenuItem
             // 
             this.описаниеЗапорсаToolStripMenuItem.Name = "описаниеЗапорсаToolStripMenuItem";
-            this.описаниеЗапорсаToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.описаниеЗапорсаToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.описаниеЗапорсаToolStripMenuItem.Text = "Описание запорса";
             this.описаниеЗапорсаToolStripMenuItem.Click += new System.EventHandler(this.описаниеЗапорсаToolStripMenuItem_Click);
             // 
@@ -200,19 +219,37 @@
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.dataGridView1_DataError);
             // 
-            // динамікаЗмінToolStripMenuItem
+            // адмініструванняToolStripMenuItem
             // 
-            this.динамікаЗмінToolStripMenuItem.Name = "динамікаЗмінToolStripMenuItem";
-            this.динамікаЗмінToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.динамікаЗмінToolStripMenuItem.Text = "Динаміка змін";
-            this.динамікаЗмінToolStripMenuItem.Click += new System.EventHandler(this.динамікаЗмінToolStripMenuItem_Click);
+            this.адмініструванняToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.зробитиАрхівБазиToolStripMenuItem,
+            this.відкритиАрхівToolStripMenuItem,
+            this.відкритиПоточнийСтанToolStripMenuItem});
+            this.адмініструванняToolStripMenuItem.Name = "адмініструванняToolStripMenuItem";
+            this.адмініструванняToolStripMenuItem.Size = new System.Drawing.Size(111, 20);
+            this.адмініструванняToolStripMenuItem.Text = "Адміністрування";
+            this.адмініструванняToolStripMenuItem.Visible = false;
             // 
-            // пошукToolStripMenuItem
+            // зробитиАрхівБазиToolStripMenuItem
             // 
-            this.пошукToolStripMenuItem.Name = "пошукToolStripMenuItem";
-            this.пошукToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.пошукToolStripMenuItem.Text = "Пошук";
-            this.пошукToolStripMenuItem.Click += new System.EventHandler(this.пошукToolStripMenuItem_Click);
+            this.зробитиАрхівБазиToolStripMenuItem.Name = "зробитиАрхівБазиToolStripMenuItem";
+            this.зробитиАрхівБазиToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.зробитиАрхівБазиToolStripMenuItem.Text = "Зробити архів бази";
+            this.зробитиАрхівБазиToolStripMenuItem.Click += new System.EventHandler(this.зробитиАрхівБазиToolStripMenuItem_Click);
+            // 
+            // відкритиАрхівToolStripMenuItem
+            // 
+            this.відкритиАрхівToolStripMenuItem.Name = "відкритиАрхівToolStripMenuItem";
+            this.відкритиАрхівToolStripMenuItem.Size = new System.Drawing.Size(179, 22);
+            this.відкритиАрхівToolStripMenuItem.Text = "Відкрити архів";
+            this.відкритиАрхівToolStripMenuItem.Click += new System.EventHandler(this.відкритиАрхівToolStripMenuItem_Click);
+            // 
+            // відкритиПоточнийСтанToolStripMenuItem
+            // 
+            this.відкритиПоточнийСтанToolStripMenuItem.Name = "відкритиПоточнийСтанToolStripMenuItem";
+            this.відкритиПоточнийСтанToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.відкритиПоточнийСтанToolStripMenuItem.Text = "Відкрити поточний стан";
+            this.відкритиПоточнийСтанToolStripMenuItem.Click += new System.EventHandler(this.відкритиПоточнийСтанToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -259,6 +296,10 @@
         private System.Windows.Forms.ToolStripMenuItem помощьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem динамікаЗмінToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem пошукToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem адмініструванняToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem зробитиАрхівБазиToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem відкритиАрхівToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem відкритиПоточнийСтанToolStripMenuItem;
 
     }
 }

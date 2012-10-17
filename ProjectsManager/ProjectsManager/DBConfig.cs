@@ -13,6 +13,9 @@ namespace ProjectsManager
         [XmlElement("ConnectionString")]
         public string ConnectionString { get; set; }
 
+        [XmlElement("ArchiveConnectionStringPattern")]
+        public string ArchiveConnectionStringPattern { get; set; }
+
         [XmlArray("Tables")]
         [XmlArrayItem("Table")]
         public ConfigTable[] Tables { get; set; }
