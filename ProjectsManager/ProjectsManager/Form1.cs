@@ -17,7 +17,18 @@ namespace ProjectsManager
         private RedContext context;
         private RedDataSet dataSet;
         private DBConfig config;
-        public static readonly ILog log = LogManager.GetLogger(typeof(Form1));
+        public static readonly ILog log = LogManager.GetLogger(typeof (Form1));
+
+        private string backupquery = @"
+BACKUP DATABASE sportdb
+   TO DISK = 'd:\SportProject\sportdb_{0}.Bak';
+RESTORE FILELISTONLY 
+   FROM DISK = 'd:\SportProject\sportdb_{0}.Bak' ;
+RESTORE DATABASE sportdb_{0}
+   FROM DISK = 'd:\SportProject\sportdb_{0}.Bak' 
+   WITH REPLACE,
+   MOVE 'sportdb' TO 'd:\SportProject\sportdb_{0}.mdf',
+   MOVE 'sportdb_log' TO 'd:\SportProject\sportdb_{0}_log.ldf';";
 
         private User currentUser;
 
@@ -26,6 +37,8 @@ namespace ProjectsManager
 
         public Form1(DBConfig config)
         {
+            log4net.Config.XmlConfigurator.Configure();
+            
             log.Debug("Application started...");
             this.config = config;
             InitializeComponent();
@@ -46,6 +59,8 @@ namespace ProjectsManager
         private void InitForm()
         {
             dataSet = new RedDataSet();
+            lstTables.Items.Clear();
+            lstReqs.Items.Clear();
             foreach (var t in config.Tables)
             {
                 dataSet.AddTable(t.query, t.name, t.SearchQuery==null? null: t.SearchQuery.Query, context);
@@ -80,8 +95,12 @@ namespace ProjectsManager
             if(currentUser.UserType == UserType.Admin)
             {
                 адмініструванняToolStripMenuItem.Visible = true;
-                dataSet.AddTable("Select Login as Логин, Password as Пароль, UserType as ТипКорисувача From Users", "Users", null, context);
-                dataSet.tables["Users"].AddComboBox("ТипКорисувача", new RedComboBox("Select Id, TypeName", "ТипКорисувача"));
+                dataSet.AddTable("Select Id, Login, Pass, UserType From Users", "Користувачі", null, context);
+                dataSet.tables["Користувачі"].AddColumnAliasHere("Login", "Логін");
+                dataSet.tables["Користувачі"].AddColumnAliasHere("Pass", "Пароль");
+                dataSet.tables["Користувачі"].AddColumnAliasHere("UserType", "ТипКористувача");
+                dataSet.tables["Користувачі"].AddComboBox("UserType", new RedComboBox("Select Id, TypeName from UserTypes", "UserType"));
+                lstTables.Items.Add("Користувачі");
             }
         }
 
@@ -199,15 +218,7 @@ namespace ProjectsManager
 
         private void помощьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Message(@"Информационная система предназначена для управления проэктами. ИС позволяет наблюдать, изменять и вносить новые корективы в базу данных. 
- 
-Чтобы открыть таблицу: двойной клик на названии таблицы в списке 'Таблицы'
-
-При внесении изменений в таблицу необходимо сохранить изменения: Действие -> Сохранить
-
-Чтобы просмотреть информацую о запросе: правый клик на названии запроса в списке 'Запросы'
-
-Чтобы выполнить запрос: двойной клик на названии запроса в списке 'Запросы'");
+            Message(@"");
         }
 
         private void динамікаЗмінToolStripMenuItem_Click(object sender, EventArgs e)
@@ -247,34 +258,55 @@ namespace ProjectsManager
 
         private void зробитиАрхівБазиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var dbpath = ".\\sportdb.mdf";
-            var dblogpath = ".\\sportdb_log.ldf";
-            var archivedbpath = ".\\archive\\sportdb{0}{1}{2}.mdf";
-            var archivedbpathlog = ".\\archive\\sportdb{0}{1}{2}_log.ldf";
-            File.Copy(dbpath, string.Format(archivedbpath, DateTime.Now.Year,DateTime.Now.Month, DateTime.Now.Day));
-            File.Copy(dblogpath, string.Format(archivedbpathlog, DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day));
-            log.DebugFormat("User {0}. Archive created for date {1}", currentUser.Login, DateTime.Now.ToString("yyyy/MM/dd"));
+            var curBackUp = string.Format(backupquery, DateTime.Now.ToString("yyyy_MM_dd_hh_mm"));
+            try
+            {
+                var res = context.Provider.ExecuteNonQuery(curBackUp);
+
+                log.DebugFormat("User {0}. Archive created for date {1} with result code {2}", currentUser.Login,
+                                DateTime.Now.ToString("yyyy/MM/dd"),
+                                res);
+                MessageBox.Show("Архів бази зроблено.");
+            }catch(Exception ex)
+            {
+                MessageBox.Show("Архівування завершилось з помилкою. За детальною інформацією дивіться лог файл.");
+
+                log.DebugFormat("User {0}. Archive created for date {1} with error {2}", currentUser.Login,
+                                DateTime.Now.ToString("yyyy/MM/dd"),
+                                ex);
+            }
+
         }
 
         private void відкритиАрхівToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog ofd = new OpenFileDialog();
-            if(ofd.ShowDialog() == DialogResult.OK)
+            var oad = new OpenArchive();
+            oad.ShowDialog();
+            if (!string.IsNullOrEmpty(oad.SelectedFile))
             {
-                if (Path.GetExtension(ofd.FileName) == ".mdf")
-                {
-                    context = new RedContext()
-                                  {
-                                      Provider = new RedDBProvider(string.Format(config.ArchiveConnectionStringPattern, Path.GetFileName(ofd.FileName)))
-                                  };
-                    log.DebugFormat("User {0} opened archive file {1}", currentUser.Login, Path.GetFileName(ofd.FileName));
-                }
+                var dbname = Path.GetFileNameWithoutExtension(oad.SelectedFile);
+                context = new RedContext()
+                              {
+                                  Provider =
+                                      new RedDBProvider(string.Format(config.ArchiveConnectionStringPattern, dbname))
+                              };
+                log.DebugFormat("User {0} opened archive database {1}", currentUser.Login, "");
+                InitForm();
+                MessageBox.Show("Архів бази завантажено.");
             }
         }
 
         private void відкритиПоточнийСтанToolStripMenuItem_Click(object sender, EventArgs e)
         {
             context = new RedContext() { Provider = new RedDBProvider(config.ConnectionString) };
+            InitForm();
+            MessageBox.Show("Поточний стан бази завантажено.");
+        }
+
+        private void одержатиДовідкуПроУчастьУЗмаганняхToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StudentCompetitionReportGeneration sf = new StudentCompetitionReportGeneration(context);
+            sf.ShowDialog();
         }
 
 

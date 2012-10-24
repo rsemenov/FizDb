@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectsManager", "ProjectsManager\ProjectsManager.csproj", "{B7937288-FBE5-4E4C-8C6F-4BC7A1225F81}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FizdbManager", "ProjectsManager\FizdbManager.csproj", "{B7937288-FBE5-4E4C-8C6F-4BC7A1225F81}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Red", "DBA\Red.csproj", "{B6121F4A-1933-494F-825F-4735D01449E1}"
 EndProject

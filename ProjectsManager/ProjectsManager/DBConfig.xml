@@ -8,7 +8,7 @@
         <Column name="FinishTime" alias="Кінець" />
       </Columns>
       <SearchQuery query="SELECT [Id],[Name] as 'Назва секції',[Description] as 'Опис'
-  FROM [Sportdb].[dbo].[Sections]
+  FROM [Sections]
   where CONTAINS (*, 'FORMSOF(INFLECTIONAL, {0})') or [Description] like '%{0}%'"/>
     </Table>
     <Table name="Розклад дзвінків" query="SELECT  [ClassNumber],[StartTime],[FinishTime]  FROM [ClassNumbers]" desc="Розклад дзвінків">
@@ -18,7 +18,7 @@
         <Column name="FinishTime" alias="Кінець" />
       </Columns>
     </Table>    
-    <Table name="Аудиторії" query="SELECT [Id],[Number],[MaxPeople],[BuildingAddress]  FROM [Sportdb].[dbo].[Classrooms]" desc="">
+    <Table name="Аудиторії" query="SELECT [Id],[Number],[MaxPeople],[BuildingAddress]  FROM [Classrooms]" desc="">
       <Columns>
         <Column name="Name" alias="Нaзва" />
       </Columns>
@@ -36,7 +36,7 @@
         <Column name="Name" alias="Нaзва" />
       </Columns>
     </Table>
-    <Table name="Участь у змаганнях" query="SELECT [Id],[CompetitionId],[StudentId],[Result],[Additional]FROM [Sportdb].[dbo].[CompetitionsStudents]" desc="">
+    <Table name="Участь у змаганнях" query="SELECT [Id],[CompetitionId],[StudentId],[Result],[Additional]FROM [CompetitionsStudents]" desc="">
       <ComboBoxes>
         <ComboBox name="CompetitionId" query="Select [Id], [Name] From Competitions"/>
 		<ComboBox name="StudentId" query="Select [Id], [Name] From Students"/>
@@ -197,6 +197,5 @@ Having Count(Id)&lt;{0})" desc="Відобразити всі групи де к
     
   </Requests>
   <ConnectionString>Data Source=.\SQLEXPRESS2008;Initial Catalog=Sportdb;Integrated Security=True</ConnectionString>
-  <ArchiveConnectionStringPattern>Data Source=.\SQLEXPRESS2008;Initial Catalog=Sportdb;Integrated Security=True</ArchiveConnectionStringPattern>
-  <ConnectionString2>Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\TK\БД\Projects.mdb</ConnectionString2>
+  <ArchiveConnectionStringPattern>Data Source=.\SQLEXPRESS2008;Initial Catalog={0};Integrated Security=True</ArchiveConnectionStringPattern>
 </DBConfig>

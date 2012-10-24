@@ -24,7 +24,7 @@ namespace Red
 
         public void CloseConnection()
         {
-            if(Connection.State==ConnectionState.Closed)
+            if(Connection.State!=ConnectionState.Closed)
                 Connection.Close();
         }
 
@@ -50,10 +50,35 @@ namespace Red
             return table;
         }
 
+        public int ExecuteNonQueryCommand(DbCommand command)
+        {
+            int res = 0;
+            try
+            {
+                OpenConnection();
+                 res = command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                CloseConnection();
+            }
+            return res;
+        }
+
         public DataTable ExecuteSelectCommand(string query)
         {
             DbCommand com = new SqlCommand(query,Connection);
             return ExecuteSelectCommand(com);
+        }
+
+        public int ExecuteNonQuery(string query)
+        {
+            DbCommand com = new SqlCommand(query, Connection);
+            return ExecuteNonQueryCommand(com);
         }
     }
 }

@@ -8,8 +8,8 @@
     <ProjectGuid>{B7937288-FBE5-4E4C-8C6F-4BC7A1225F81}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ProjectsManager</RootNamespace>
-    <AssemblyName>ProjectsManager</AssemblyName>
+    <RootNamespace>FizdbManager</RootNamespace>
+    <AssemblyName>FizdbManager</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -118,6 +118,12 @@
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="OpenArchive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OpenArchive.Designer.cs">
+      <DependentUpon>OpenArchive.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="ChartForm.resx">
@@ -129,6 +135,9 @@
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="OpenArchive.resx">
+      <DependentUpon>OpenArchive.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -136,6 +145,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchForm.resx">
       <DependentUpon>SearchForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StudentCompetitionReportGeneration.resx">
+      <DependentUpon>StudentCompetitionReportGeneration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewForm.resx">
       <DependentUpon>ViewForm.cs</DependentUpon>
@@ -145,7 +157,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -160,6 +174,12 @@
     </Compile>
     <Compile Include="SearchForm.Designer.cs">
       <DependentUpon>SearchForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StudentCompetitionReportGeneration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StudentCompetitionReportGeneration.Designer.cs">
+      <DependentUpon>StudentCompetitionReportGeneration.cs</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
     <Compile Include="ViewForm.cs">
@@ -178,7 +198,11 @@
   <ItemGroup>
     <Content Include="DBConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
+    <None Include="Reports\student_report.tmpl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
