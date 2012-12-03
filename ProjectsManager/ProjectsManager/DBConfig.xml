@@ -3,9 +3,9 @@
   <Tables>
     <Table name="Секції" query="SELECT TOP 1000 [Id], [Name], [Description]  FROM [Sections]" desc="">
       <Columns>
-        <Column name="ClassNumber" alias="Номер пари" />
-        <Column name="StartTime" alias="Початок" />
-        <Column name="FinishTime" alias="Кінець" />
+        <Column name="Id" alias="ІД" />
+        <Column name="Name" alias="Назва" />
+        <Column name="Description" alias="Опис" />
       </Columns>
       <SearchQuery query="SELECT [Id],[Name] as 'Назва секції',[Description] as 'Опис'
   FROM [Sections]
@@ -20,12 +20,16 @@
     </Table>    
     <Table name="Аудиторії" query="SELECT [Id],[Number],[MaxPeople],[BuildingAddress]  FROM [Classrooms]" desc="">
       <Columns>
-        <Column name="Name" alias="Нaзва" />
+	    <Column name="Id" alias="ІД" />
+        <Column name="Number" alias="Номер/назва" />
+		<Column name="MaxPeople" alias="Вмістимість" />
+		<Column name="BuildingAddress" alias="Адреса" />
       </Columns>
     </Table>
     <Table name="Наукові ступені" query="SELECT [Id],[Title] FROM [Degrees]" desc="">
       <Columns>
         <Column name="Title" alias="Наукова ступінь" />
+		<Column name="Id" alias="ІД" />
       </Columns>
     </Table>
 	  <Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
@@ -33,7 +37,11 @@
         <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
       </ComboBoxes>
       <Columns>
-        <Column name="Name" alias="Нaзва" />
+        <Column name="Id" alias="ІД" />
+		<Column name="Name" alias="Нaзва" />
+		<Column name="SectionId" alias="Секція" />
+		<Column name="StartDateTime" alias="Початок" />
+		<Column name="Address" alias="Адреса" />
       </Columns>
     </Table>
     <Table name="Участь у змаганнях" query="SELECT [Id],[CompetitionId],[StudentId],[Result],[Additional]FROM [CompetitionsStudents]" desc="">
@@ -42,17 +50,26 @@
 		<ComboBox name="StudentId" query="Select [Id], [Name] From Students"/>
       </ComboBoxes>
       <Columns>
-        <Column name="Name" alias="Нaзва" />
+        <Column name="Id" alias="ІД" />
+		<Column name="CompetitionId" alias="Секція" />
+		<Column name="StudentId" alias="Студент" />
+		<Column name="Result" alias="Результат" />
+		<Column name="Additional" alias="Додатково" />
       </Columns>
     </Table>
     <Table name="Курс" query="SELECT [Id], [Title] FROM [Courses]" desc="">
       <Columns>
         <Column name="Title" alias="Нaзва курсу" />
+		<Column name="Id" alias="ІД" />
       </Columns>
     </Table>
     <Table name="Факультети" query="SELECT [Id],[Name],[DeanName],[Address],[Phone] FROM [Faculties]" desc="">
       <Columns>
-        <Column name="Name" alias="Нaзва" />
+        <Column name="Id" alias="ІД" />
+		<Column name="Name" alias="Нaзва" />
+		<Column name="DeanName" alias="Декан" />
+		<Column name="Address" alias="Адреса" />
+		<Column name="Phone" alias="Телефон" />
       </Columns>
     </Table>
     <Table name="Розклад пар" query="SELECT [Id], [SectionId],[TeacherId],[ClassroomId],[GroupId],[DayOfWeek],[ClassNumberId] FROM [Scheduler]" desc="">
@@ -65,7 +82,13 @@
 		<ComboBox name="ClassNumberId" query="Select ClassNumber From ClassNumbers"/>
       </ComboBoxes>
       <Columns>
-        <Column name="Name" alias="Нaзва" />
+        <Column name="Id" alias="ІД" />
+		<Column name="SectionId" alias="Секція" />
+		<Column name="TeacherId" alias="Викладач" />
+		<Column name="ClassroomId" alias="Аудиторія" />
+		<Column name="GroupId" alias="Група" />
+		<Column name="DayOfWeek" alias="День тижня" />
+		<Column name="ClassNumberId" alias="Номер пари" />
       </Columns>
     </Table>
     <Table name="Групи" query="SELECT [Id],[Title],[SectionId],[Webpage] FROM [Groups]" desc="">
@@ -73,17 +96,19 @@
         <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
       </ComboBoxes>
       <Columns>
+	    <Column name="Id" alias="ІД" />
         <Column name="Title" alias="Нaзва групи" />
         <Column name="Webpage" alias="Сайт групи" />
         <Column name="SectionId" alias="Секція" />
       </Columns>
     </Table>
-    <Table name="ВикладачСекція" query="SELECT [Id],[SectionId],[TeacherId] FROM [SectionsTeachers]" desc="Змагання">
+    <Table name="Викладач/Секція" query="SELECT [Id],[SectionId],[TeacherId] FROM [SectionsTeachers]" desc="Змагання">
       <ComboBoxes>
         <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
         <ComboBox name="TeacherId" query="Select [Id], [Name] From Teachers"/>
       </ComboBoxes>
       <Columns>
+		<Column name="Id" alias="ІД" />
         <Column name="SectionId" alias="Секція" />
         <Column name="TeacherId" alias="Викладач" />
       </Columns>
@@ -93,6 +118,7 @@
       <ComboBox name="Degree" query="Select [Id], [Title] From Degrees"/>
     </ComboBoxes>
     <Columns>
+		<Column name="Id" alias="ІД" />
         <Column name="Name" alias="ПІП" />
         <Column name="DateOfBirth" alias="Дата народження" />
         <Column name="Degree" alias="Ступінь" />
@@ -110,6 +136,7 @@
         <ComboBox name="ClassNumberId" query="Select ClassNumber From ClassNumbers"/>
       </ComboBoxes>
       <Columns>
+		<Column name="Id" alias="ІД" />
         <Column name="Name" alias="ПІП" />
         <Column name="Faculty" alias="Факультет" />
         <Column name="Course" alias="Курс" />

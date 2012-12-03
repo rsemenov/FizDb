@@ -34,13 +34,13 @@
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.динамікаЗмінToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.пошукToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.адмініструванняToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.зробитиАрхівБазиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.відкритиАрхівToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.відкритиПоточнийСтанToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.довідкаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.одержатиДовідкуПроУчастьУЗмаганняхToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.помощьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.lstReqs = new System.Windows.Forms.ListBox();
@@ -105,13 +105,6 @@
             this.пошукToolStripMenuItem.Text = "Пошук";
             this.пошукToolStripMenuItem.Click += new System.EventHandler(this.пошукToolStripMenuItem_Click);
             // 
-            // помощьToolStripMenuItem
-            // 
-            this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
-            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
-            this.помощьToolStripMenuItem.Text = "Допомога";
-            this.помощьToolStripMenuItem.Click += new System.EventHandler(this.помощьToolStripMenuItem_Click);
-            // 
             // адмініструванняToolStripMenuItem
             // 
             this.адмініструванняToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -158,6 +151,13 @@
             this.одержатиДовідкуПроУчастьУЗмаганняхToolStripMenuItem.Size = new System.Drawing.Size(293, 22);
             this.одержатиДовідкуПроУчастьУЗмаганняхToolStripMenuItem.Text = "Одержати довідку про участь у змаганнях";
             this.одержатиДовідкуПроУчастьУЗмаганняхToolStripMenuItem.Click += new System.EventHandler(this.одержатиДовідкуПроУчастьУЗмаганняхToolStripMenuItem_Click);
+            // 
+            // помощьToolStripMenuItem
+            // 
+            this.помощьToolStripMenuItem.Name = "помощьToolStripMenuItem";
+            this.помощьToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
+            this.помощьToolStripMenuItem.Text = "Допомога";
+            this.помощьToolStripMenuItem.Click += new System.EventHandler(this.помощьToolStripMenuItem_Click);
             // 
             // panel1
             // 
