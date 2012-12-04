@@ -1,0 +1,228 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DBConfig>
+  <Tables>
+    <Table name="Секції" query="SELECT TOP 1000 [Id], [Name], [Description]  FROM [Sections]" desc="">
+      <Columns>
+        <Column name="Id" alias="ІД" />
+        <Column name="Name" alias="Назва" />
+        <Column name="Description" alias="Опис" />
+      </Columns>
+      <SearchQuery query="SELECT [Id],[Name] as 'Назва секції',[Description] as 'Опис'
+  FROM [Sections]
+  where CONTAINS (*, 'FORMSOF(INFLECTIONAL, {0})') or [Description] like '%{0}%'"/>
+    </Table>
+    <Table name="Розклад дзвінків" query="SELECT  [ClassNumber],[StartTime],[FinishTime]  FROM [ClassNumbers]" desc="Розклад дзвінків">
+      <Columns>
+        <Column name="ClassNumber" alias="Номер пари" />
+        <Column name="StartTime" alias="Початок" />
+        <Column name="FinishTime" alias="Кінець" />
+      </Columns>
+    </Table>    
+    <Table name="Аудиторії" query="SELECT [Id],[Number],[MaxPeople],[BuildingAddress]  FROM [Classrooms]" desc="">
+      <Columns>
+	    <Column name="Id" alias="ІД" />
+        <Column name="Number" alias="Номер/назва" />
+		<Column name="MaxPeople" alias="Вмістимість" />
+		<Column name="BuildingAddress" alias="Адреса" />
+      </Columns>
+    </Table>
+    <Table name="Наукові ступені" query="SELECT [Id],[Title] FROM [Degrees]" desc="">
+      <Columns>
+        <Column name="Title" alias="Наукова ступінь" />
+		<Column name="Id" alias="ІД" />
+      </Columns>
+    </Table>
+	  <Table name="Змагання" query="SELECT [Id], [Name], [SectionId], [StartDateTime], [Address]  FROM [Competitions]" desc="Змагання">
+      <ComboBoxes>
+        <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
+      </ComboBoxes>
+      <Columns>
+        <Column name="Id" alias="ІД" />
+		<Column name="Name" alias="Нaзва" />
+		<Column name="SectionId" alias="Секція" />
+		<Column name="StartDateTime" alias="Початок" />
+		<Column name="Address" alias="Адреса" />
+      </Columns>
+    </Table>
+    <Table name="Участь у змаганнях" query="SELECT [Id],[CompetitionId],[StudentId],[Result],[Additional]FROM [CompetitionsStudents]" desc="">
+      <ComboBoxes>
+        <ComboBox name="CompetitionId" query="Select [Id], [Name] From Competitions"/>
+		<ComboBox name="StudentId" query="Select [Id], [Name] From Students"/>
+      </ComboBoxes>
+      <Columns>
+        <Column name="Id" alias="ІД" />
+		<Column name="CompetitionId" alias="Секція" />
+		<Column name="StudentId" alias="Студент" />
+		<Column name="Result" alias="Результат" />
+		<Column name="Additional" alias="Додатково" />
+      </Columns>
+    </Table>
+    <Table name="Курс" query="SELECT [Id], [Title] FROM [Courses]" desc="">
+      <Columns>
+        <Column name="Title" alias="Нaзва курсу" />
+		<Column name="Id" alias="ІД" />
+      </Columns>
+    </Table>
+    <Table name="Факультети" query="SELECT [Id],[Name],[DeanName],[Address],[Phone] FROM [Faculties]" desc="">
+      <Columns>
+        <Column name="Id" alias="ІД" />
+		<Column name="Name" alias="Нaзва" />
+		<Column name="DeanName" alias="Декан" />
+		<Column name="Address" alias="Адреса" />
+		<Column name="Phone" alias="Телефон" />
+      </Columns>
+    </Table>
+    <Table name="Розклад пар" query="SELECT [Id], [SectionId],[TeacherId],[ClassroomId],[GroupId],[DayOfWeek],[ClassNumberId] FROM [Scheduler]" desc="">
+      <ComboBoxes>
+        <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
+		<ComboBox name="TeacherId" query="Select [Id], [Name] From Teachers"/>
+		<ComboBox name="ClassroomId" query="Select [Id], [Number] From Classrooms"/>
+		<ComboBox name="GroupId" query="Select [Id], [Title] From Groups"/>
+		<ComboBox name="DayOfWeek" query="Select Day From DaysOfWeek"/>
+		<ComboBox name="ClassNumberId" query="Select ClassNumber From ClassNumbers"/>
+      </ComboBoxes>
+      <Columns>
+        <Column name="Id" alias="ІД" />
+		<Column name="SectionId" alias="Секція" />
+		<Column name="TeacherId" alias="Викладач" />
+		<Column name="ClassroomId" alias="Аудиторія" />
+		<Column name="GroupId" alias="Група" />
+		<Column name="DayOfWeek" alias="День тижня" />
+		<Column name="ClassNumberId" alias="Номер пари" />
+      </Columns>
+    </Table>
+    <Table name="Групи" query="SELECT [Id],[Title],[SectionId],[Webpage] FROM [Groups]" desc="">
+      <ComboBoxes>
+        <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
+      </ComboBoxes>
+      <Columns>
+	    <Column name="Id" alias="ІД" />
+        <Column name="Title" alias="Нaзва групи" />
+        <Column name="Webpage" alias="Сайт групи" />
+        <Column name="SectionId" alias="Секція" />
+      </Columns>
+    </Table>
+    <Table name="Викладач/Секція" query="SELECT [Id],[SectionId],[TeacherId] FROM [SectionsTeachers]" desc="Змагання">
+      <ComboBoxes>
+        <ComboBox name="SectionId" query="Select [Id], [Name] From Sections"/>
+        <ComboBox name="TeacherId" query="Select [Id], [Name] From Teachers"/>
+      </ComboBoxes>
+      <Columns>
+		<Column name="Id" alias="ІД" />
+        <Column name="SectionId" alias="Секція" />
+        <Column name="TeacherId" alias="Викладач" />
+      </Columns>
+    </Table>
+  <Table name="Викладачі" query="SELECT [Id],[Name],[DateOfBirth],[Degree],[WorkFrom],[Address],[Phone] FROM [Teachers]" desc="">
+    <ComboBoxes>
+      <ComboBox name="Degree" query="Select [Id], [Title] From Degrees"/>
+    </ComboBoxes>
+    <Columns>
+		<Column name="Id" alias="ІД" />
+        <Column name="Name" alias="ПІП" />
+        <Column name="DateOfBirth" alias="Дата народження" />
+        <Column name="Degree" alias="Ступінь" />
+        <Column name="WorkFrom" alias="Працює з" />
+        <Column name="Address" alias="Адреса" />
+        <Column name="Phone" alias="Телефон" />
+      </Columns>
+    </Table>
+    <Table name="Студенти" query="SELECT [Id],[Name],[Faculty],[Course],[GroupId],[Address],[Phone],[EnterDate],[GraduateDate] FROM [Students]" desc="">
+      <ComboBoxes>
+        <ComboBox name="Faculty" query="Select [Id], [Name] From Faculties"/>
+        <ComboBox name="Course" query="Select [Id], [Title] From Courses"/>
+        <ComboBox name="GroupId" query="Select [Id], [Title] From Groups"/>
+        <ComboBox name="DayOfWeek" query="Select Day From DaysOfWeek"/>
+        <ComboBox name="ClassNumberId" query="Select ClassNumber From ClassNumbers"/>
+      </ComboBoxes>
+      <Columns>
+		<Column name="Id" alias="ІД" />
+        <Column name="Name" alias="ПІП" />
+        <Column name="Faculty" alias="Факультет" />
+        <Column name="Course" alias="Курс" />
+        <Column name="GroupId" alias="Група" />
+        <Column name="Address" alias="Адреса" />
+        <Column name="Phone" alias="Телефон" />
+        <Column name="EnterDate" alias="Дата вступу" />
+        <Column name="GraduateDate" alias="Дата випуску" />
+      </Columns>
+    </Table>
+  </Tables>
+  <Requests>
+    <Request name="Студенти секції" query="SELECT std.Name as 'ПІП'
+	  ,grp.Title as 'Група'
+      ,fct.Name as 'Факультет'
+      ,crs.Title as 'Курс'
+      ,std.[Address] as 'Адреса'
+      ,std.Phone as 'Телефон'
+      ,std.[EnterDate] as 'Дата вступу'
+      ,std.[GraduateDate] as 'Дата випуску'       
+  FROM ([Students] std inner join Groups grp on std.GroupId=grp.Id)
+  inner join Sections sect on grp.SectionId=sect.Id
+  inner join Faculties fct on fct.Id=std.Faculty
+  inner join Courses crs on crs.Id=std.Course
+  where sect.Name='{0}'" desc="Відобразити всіх студентів обраної секції">
+      <ComboBoxes>
+        <ComboBox name="Секція" query="Select Name from Sections"/>
+      </ComboBoxes>
+    </Request>
+
+    <Request name="Студенти групи" query="SELECT std.Name as 'ПІП'
+	  ,grp.Title as 'Група'
+      ,fct.Name as 'Факультет'
+      ,crs.Title as 'Курс'
+      ,std.[Address] as 'Адреса'
+      ,std.Phone as 'Телефон'
+      ,std.[EnterDate] as 'Дата вступу'
+      ,std.[GraduateDate] as 'Дата випуску'       
+  FROM ([Students] std inner join Groups grp on std.GroupId=grp.Id)
+  inner join Sections sect on grp.SectionId=sect.Id
+  inner join Faculties fct on fct.Id=std.Faculty
+  inner join Courses crs on crs.Id=std.Course
+  where grp.Title='{0}'" desc="Відобразити студентів обраної групи"> 
+      <ComboBoxes>
+        <ComboBox name="Група" query="Select Title from Groups"/>
+      </ComboBoxes>
+    </Request>
+    
+    <Request name="Групи за кількістю" query="SELECT [Title] as 'Назва групи'
+      ,sct.Name as 'Назва секції'
+      ,[Webpage] as 'Веб сторінка'
+  FROM [Groups] grp inner join Sections sct on grp.SectionId=sct.Id
+where grp.Id in
+(select GroupId
+from Students
+Group by GroupId
+Having Count(Id)&lt;{0})" desc="Відобразити всі групи де кількість студентів менше заданої">
+      <ComboBoxes>
+        <ComboBox name="Кількість студентів" query="textedit"/>
+      </ComboBoxes>
+    </Request>
+    
+    <Request name="Викладачі" query="SELECT [Name] as 'ПІП'
+      ,[DateOfBirth] as 'Дата народження'
+      ,d.[Title] as 'Ступінь'
+      ,[WorkFrom] as 'Стаж роботи'
+      ,[Address] as 'Адреса'
+      ,[Phone] as 'Телефон'
+  FROM [Sportdb].[dbo].[Teachers] t inner join [Degrees] d on t.Degree=d.Id
+  where year(GETDATE())>=year([DateOfBirth])+{0}
+  and year(GETDATE())>=year(WorkFrom)+{1}
+  and d.[Title] = '{2}'" desc="Відобразити викладачів віком не менше заданого, що мають стаж не менше заданого і вказаний ступінь">
+      <ComboBoxes>
+        <ComboBox name="Вік" query="textedit"/>
+        <ComboBox name="Стаж" query="textedit"/>
+        <ComboBox name="Ступінь" query="Select Title from [Degrees]"/>
+      </ComboBoxes>
+    </Request>
+    
+    <Request name="" query="">
+      <ComboBoxes>
+        <ComboBox name="" query=""/>
+      </ComboBoxes>
+    </Request>
+    
+  </Requests>
+  <ConnectionString>Data Source=.\SQLEXPRESS2008;Initial Catalog=Sportdb;Integrated Security=True</ConnectionString>
+  <ArchiveConnectionStringPattern>Data Source=.\SQLEXPRESS2008;Initial Catalog={0};Integrated Security=True</ArchiveConnectionStringPattern>
+</DBConfig>

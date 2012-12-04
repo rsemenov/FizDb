@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<h2>@ViewBag.Message</h2>
+
+<table style="border: 0;">
+<tr>
+<td align="left" valign="top" width="200" style="border: 0;">
+<div id="treeview">
+@foreach (var tbl in ViewData.Model.Tables)
+{
+    <a href="?table=@tbl">@tbl</a>
+    <br />
+}
+</div>
+</td>
+
+<td align="left" valign="top" width="800" style="border: 0;">
+<div>
+<table>
+ <tr>
+    @foreach (var col in ViewData.Model.CurrentTable.Columns)
+    {   
+        <td>@col</td>
+    }
+ </tr>
+ @for (int r = 0; r < ViewData.Model.CurrentTable.Rows.Count; r++)
+ {
+     var row = ViewData.Model.CurrentTable.Rows[r];
+   <tr>
+   @for (int i = 0; i < row.Length; i++)
+   {      
+           <td>@row[i].ToString()</td>                
+   }
+   </tr>
+ }
+ </table>
+</div>
+</td>
+</tr>
+</table>
